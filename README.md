@@ -1,10 +1,10 @@
 # kcultureShop — Hito 1: Dominio y Pruebas Unitarias
 
-Este repositorio de **kcultureShop**, es el módulo de comercio electrónico y tienda oficial que se quiere integrar al ecosistema del proyecto **Chinzillas Sin Filtro**; una plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
+Este repositorio de **kcultureShop** es el módulo; o extension, de comercio electrónico y tienda oficial que se quiere integrar al ecosistema del proyecto **Chinzillas Sin Filtro**; una plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
 
-Este módulo comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
+Este módulo para el hito 1; comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
 
-Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant. 
+Para su realizacion y complementacion con la idea ya pensada, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant. 
 
 
 
