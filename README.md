@@ -1,12 +1,12 @@
-# kculture-shop — Hito 1: Dominio y Pruebas Unitarias
+# kcultureShop — Hito 1: Dominio y Pruebas Unitarias
 
 Este repositorio de **kculture-shop**, es el módulo de comercio electrónico y tienda oficial que se quiere integrar al ecosistema del proyecto **Chinzillas Sin Filtro** —plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
 
 Este módulo comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
 
-Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant.
+Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant. 
 
----
+
 
 ## Contexto de Negocio
 
@@ -16,7 +16,7 @@ Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 -
 - **`Product`**: Representa un artículo disponible en catálogo, controlando stock, categorías y validación estricta de cantidades.
 - **`OrderService`**: Servicio de aplicación que procesa compras y coordina la notificación de envíos mediante la abstracción `ShippingNotifier`.
 
----
+
 
 ## Componentes del Proyecto
 
@@ -31,7 +31,7 @@ Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 -
 * **`OrderService`**: Procesa la compra, valida el flujo comercial y dispara eventos de envío.
 * **`ShippingNotifier`**: Interfaz desacoplada (puerto/abstracción) para el envío de notificaciones de despacho.
 
----
+
 
 ## Tecnologías y Requisitos
 
@@ -41,7 +41,7 @@ Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 -
 * **Dobles de Prueba:** Mockito Core / Mockito JUnit Jupiter
 * **Cobertura:** JaCoCo Plugin
 
----
+
 
 ## Ejecución y Comandos Maven
 
@@ -74,9 +74,9 @@ A continuación, abre el reporte generado en tu navegador:
 target/site/jacoco/index.html
 ```
 
-> Nota: este reporte se genera localmente y forma parte de los artefactos en `target/`. No debes subir `target/` a GitHub; esa carpeta está excluida en `.gitignore`.
+> Nota: este reporte se genera localmente y forma parte de los artefactos en `target/`; esa carpeta está excluida en `.gitignore`.
 
----
+
 ## Métrica de Cobertura de Código
 Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica verificable del 100% (Branch y Line Coverage) sin líneas condicionales desprotegidas:
 
@@ -129,8 +129,6 @@ kculture-shop/
 └── README.md
 ```
 
-
----
 ## Notas de Implementación
 Desacoplamiento Estricto: El modelo de dominio es autónomo y no posee dependencias con frameworks web, ORMs o bases de datos físicas
 
