@@ -1,10 +1,10 @@
 # kculture-shop — Hito 1: Dominio y Pruebas Unitarias
 
-Este repositorio de **kculture-shop**, el módulo de comercio electrónico y tienda oficial que se quiere integrar al ecosistema de **Chinzillas Sin Filtro** —plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
+Este repositorio de **kculture-shop**, es el módulo de comercio electrónico y tienda oficial que se quiere integrar al ecosistema del proyecto **Chinzillas Sin Filtro** —plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
 
 Este módulo comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
 
-Se considero las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant.
+Para su realizacion, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant.
 
 ---
 
@@ -80,17 +80,21 @@ target/site/jacoco/index.html
 ## Métrica de Cobertura de Código
 Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica verificable del 100% (Branch y Line Coverage) sin líneas condicionales desprotegidas:
 
-```
-Paquete / Clase,Cobertura de Líneas,Cobertura de Ramas,Estado
-com.kcultureshop.domain.Product,100%,100%,🟢 OK
-com.kcultureshop.domain.Order,100%,100%,🟢 OK
-com.kcultureshop.domain.InvalidQuantityException,100%,100%,🟢 OK
-com.kcultureshop.service.OrderService,100%,100%,🟢 OK
-Total Proyecto,100%,100%,🟢 Excelente
-```
+| Paquete / Clase | Cobertura de Líneas | Cobertura de Ramas | Estado |
+|---|---|---|---|
+| `com.kcultureshop.domain.Product` | 100% | 100% | 🟢 OK |
+| `com.kcultureshop.domain.Order` | 100% | 100% | 🟢 OK |
+| `com.kcultureshop.domain.ProductCategory` | 100% | N/A | 🟢 OK |
+| `com.kcultureshop.domain.ShippingType` | 100% | N/A | 🟢 OK |
+| `com.kcultureshop.domain.InvalidQuantityException` | 100% | N/A | 🟢 OK |
+| `com.kcultureshop.service.OrderService` | 100% | 100% | 🟢 OK |
+| **Total Proyecto** | **100%** | **100%** | 🟢 **Excelente** |
+
+> El reporte completo e interactivo se genera localmente en `target/site/jacoco/index.html` tras ejecutar `mvn verify`.
 
 
 ## Estructura del Repositorio
+```text
 kculture-shop/
 ├── .mvn/
 │   └── wrapper/
@@ -123,15 +127,15 @@ kculture-shop/
 ├── pom.xml
 ├── .gitignore
 └── README.md
-
+```
 
 
 ---
 ## Notas de Implementación
-> Desacoplamiento Estricto: El modelo de dominio es autónomo y no posee dependencias con frameworks web, ORMs o bases de datos físicas
+Desacoplamiento Estricto: El modelo de dominio es autónomo y no posee dependencias con frameworks web, ORMs o bases de datos físicas
 
- Inyección por Constructor: Los servicios reciben sus dependencias vía constructor, facilitando la inserción de Mocks durante las pruebas.
+Inyección por Constructor: Los servicios reciben sus dependencias vía constructor, facilitando la inserción de Mocks durante las pruebas.
 
-Idioma del Código: Toda la nomenclatura de clases, métodos, variables y comentarios técnicos está estandarizada en inglés (Dado que quiero continuar practicando este formato de comentario y nomenclatura de un solo tipo al momento de practicar).
+Idioma del Código: Toda la nomenclatura de clases, métodos, variables está estandarizada en inglés; De igual forma los comentarios estan en español para un mejor entendimiento de lo que se realiza en el codigo.
 
 Entorno Limpio: El repositorio incluye la configuración adecuada en .gitignore para omitir compilados (target/) y archivos temporales de IDEs.
