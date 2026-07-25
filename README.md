@@ -1,8 +1,10 @@
 # kculture-shop — Hito 1: Dominio y Pruebas Unitarias
 
-Bienvenido/a al repositorio de **kculture-shop**, el módulo de comercio electrónico y tienda oficial que se integra al ecosistema de **Chinzillas Sin Filtro** —plataforma dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
+Este repositorio de **kculture-shop**, el módulo de comercio electrónico y tienda oficial que se quiere integrar al ecosistema de **Chinzillas Sin Filtro** —plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
 
-Este módulo comprende el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
+Este módulo comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
+
+Se considero las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant.
 
 ---
 
@@ -21,7 +23,7 @@ Este módulo comprende el diseño e implementación del **Core de Dominio Puro**
 ### Dominio Puro (`com.kcultureshop.domain`)
 * **`Product`**: POJO con ID, nombre, categoría, precio y control de stock.
 * **`Order`**: Encapsula la lógica de la orden de compra, el cálculo automático de costos y reglas de validación.
-* **`ProductCategory`**: Enumeración de las sub-categorías del inventario (K-Pop, Merch, Manga, etc.).
+* **`ProductCategory`**: Enumeración de las sub-categorías del inventario (ALBUM, PHOTOCARD, MERC, FIGURE).
 * **`ShippingType`**: Modalidades y reglas de envío.
 * **`InvalidQuantityException`**: Excepción personalizada para el control de errores de negocio.
 
@@ -88,7 +90,6 @@ Total Proyecto,100%,100%,🟢 Excelente
 ```
 
 
----
 ## Estructura del Repositorio
 kculture-shop/
 ├── .mvn/
@@ -122,6 +123,8 @@ kculture-shop/
 ├── pom.xml
 ├── .gitignore
 └── README.md
+
+
 
 ---
 ## Notas de Implementación
