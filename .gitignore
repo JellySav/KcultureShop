@@ -1,0 +1,25 @@
+# Maven build output
+/target/
+
+# Maven wrapper artifacts (keep the wrapper scripts and properties, ignore the downloaded JAR)
+/.mvn/wrapper/maven-wrapper.jar
+
+# IDEA
+/.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
