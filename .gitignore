@@ -1,12 +1,12 @@
+# Java & Maven (Hito 1)
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
 # Maven build output
 /target/
 
 # Maven wrapper artifacts (keep the wrapper scripts and properties, ignore the downloaded JAR)
 /.mvn/wrapper/maven-wrapper.jar
-
-# IDEA
-/.idea/
-*.iml
 
 # VS Code
 .vscode/
@@ -23,3 +23,14 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.swp
+
+# Node & Vite (Hito 2)
+node_modules/
+dist/
+*.local
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.DS_Store
