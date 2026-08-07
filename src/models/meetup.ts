@@ -12,17 +12,11 @@ export enum MeetupType {
 export interface Meetup {
   id: string;
   title: string;
-  category: "WATCH_PARTY" | "CHARLA_LIBRO" | "FANMEETING" | "DEBATE_SERIE" | "ANIVERSARIO_PARTY" | "CUMPLE_SPECIAL";
+  category: "WATCH_PARTY" | "CHARLA_LIBRO" | "FANMEETING" | "DEBATE_SERIE" | "ANIVERSARIO"  | "VIDEOJUEGOS";
   type: MeetupType;
-  countryOrPlatform: string; // Ejemplo tipo Chile, Mexico, Discord,Zoom 
+  countryOrPlatform: string;
   date: string;
   spotsAvailable: number;
   status: MeetupStatus;
-}
-
-export interface ReservationPayload {
-  fullName: string;
-  email: string;
-  meetupId: string;
-  attendees: number;
+  imageUrl: string; // Nueva propiedad para la imagen de portada
 }

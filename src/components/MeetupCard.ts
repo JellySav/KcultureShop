@@ -2,26 +2,29 @@ import { Meetup, MeetupStatus, MeetupType } from "../models/meetup";
 
 export function generateMeetupCardHtml(meetup: Meetup): string {
   const isLive = meetup.status === MeetupStatus.EN_VIVO;
-  const statusClass = isLive ? "badge badge-live" : "badge";
-  const statusLabel = isLive ? "🔴 En Vivo" : meetup.status;
+  const statusBadge = isLive 
+    ? `<span class="badge badge-live">🔴 En Vivo</span>` 
+    : `<span class="badge badge-status">${meetup.status}</span>`;
 
-  const typeBadgeClass = meetup.type === MeetupType.VIRTUAL ? "badge badge-virtual" : "badge badge-physical";
-  const typeLabel = meetup.type === MeetupType.VIRTUAL ? "Virtual" : "Presencial";
+  const typeBadge = meetup.type === MeetupType.VIRTUAL 
+    ? `<span class="badge badge-virtual">💻 Virtual</span>` 
+    : `<span class="badge badge-physical">📍 Presencial</span>`;
 
   return `
     <article class="card-meetup" data-id="${meetup.id}">
-      <header class="card-header">
-        <div>
-          <span class="${typeBadgeClass}">${typeLabel}</span>
-          <span class="${statusClass}">${statusLabel}</span>
+      <img src="${meetup.imageUrl}" alt="${meetup.title}" class="card-image-wrapper" />
+      <div class="card-content">
+        <div class="card-badges">
+          ${typeBadge}
+          ${statusBadge}
         </div>
-        <h3>${meetup.title}</h3>
-      </header>
-      <div class="card-body">
-        <p><strong>Tipo:</strong> ${meetup.category.replace("_", " ")}</p>
-        <p><strong>Ubicación/Plataforma:</strong> ${meetup.countryOrPlatform}</p>
-        <p><strong>Fecha y Hora:</strong> ${meetup.date}</p>
-        <p><strong>Cupos disponibles:</strong> ${meetup.spotsAvailable}</p>
+        <h3 class="card-title">${meetup.title}</h3>
+        <div class="card-info">
+          <span> <strong>Tipo:</strong> ${meetup.category.replace("_", " ")}</span>
+          <span> <strong>Ubicación:</strong> ${meetup.countryOrPlatform}</span>
+          <span> <strong>Fecha:</strong> ${meetup.date}</span>
+          <span> <strong>Cupos disponibles:</strong> ${meetup.spotsAvailable}</span>
+        </div>
       </div>
     </article>
   `;
