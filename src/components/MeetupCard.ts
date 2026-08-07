@@ -6,7 +6,7 @@ export function generateMeetupCardHtml(meetup: Meetup): string {
   
   let statusBadge: string;
   
-  // 1. Prioridad Máxima: Evento Finalizado
+  // 1. Prioridad Máxima: Evento Finalizado -> Evitar error al momento de sobrescribir en agotado
   if (isFinished) {
     statusBadge = `<span class="badge badge-status">FINALIZADO</span>`;
   } 

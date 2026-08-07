@@ -60,7 +60,7 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Solución al traslape visual de tarjetas */
+/* Visual de tarjetas */
 .card-meetup {
   background-color: var(--bg-card);
   border: 1px solid var(--border-card);
@@ -301,4 +301,27 @@ input:focus, select:focus {
   font-size: 0.9rem;
   color: var(--text-muted);
   font-weight: 500;
+}
+
+/* Ordenar grilla */
+.sorting-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.select-control {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #383b53;
+  background-color: #1a1c2e;
+  color: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.select-control:focus {
+  outline: none;
+  border-color: #6366f1;
 }

@@ -2,35 +2,45 @@ import { Meetup, MeetupStatus, MeetupType } from "./models/meetup";
 import { fetchMeetups } from "./services/meetupService";
 import { generateMeetupCardHtml } from "./components/MeetupCard";
 
+// Tipos de ordenamiento soportados
+type SortOption = "DATE_ASC" | "DATE_DESC" | "STATUS";
+
 // Estado global en memoria
 let allMeetups: Meetup[] = [];
 let filteredMeetups: Meetup[] = [];
+let currentSort: SortOption = "DATE_ASC";
 let currentPage = 1;
 const PAGE_SIZE = 6;
 
-export function sortMeetupsByDate(meetups: Meetup[], ascending: boolean = true): Meetup[] {
+/**
+ * Ordena la lista de eventos según el criterio seleccionado.
+ */
+export function sortMeetups(meetups: Meetup[], criteria: SortOption): Meetup[] {
   return [...meetups].sort((a, b) => {
     const dateA = new Date(a.date.replace(" hrs", "")).getTime();
     const dateB = new Date(b.date.replace(" hrs", "")).getTime();
 
-    return ascending ? dateA - dateB : dateB - dateA;
-  });
-}
+    if (criteria === "DATE_ASC") {
+      return dateA - dateB;
+    } 
+    
+    if (criteria === "DATE_DESC") {
+      return dateB - dateA;
+    } 
+    
+    if (criteria === "STATUS") {
+      const isFinishedA = a.status === MeetupStatus.FINALIZADO;
+      const isFinishedB = b.status === MeetupStatus.FINALIZADO;
 
-export function sortMeetupsByStatusAndDate(meetups: Meetup[]): Meetup[] {
-  return [...meetups].sort((a, b) => {
-    const isFinishedA = a.status === MeetupStatus.FINALIZADO;
-    const isFinishedB = b.status === MeetupStatus.FINALIZADO;
+      // Finalizados al fondo
+      if (isFinishedA && !isFinishedB) return 1;
+      if (!isFinishedA && isFinishedB) return -1;
 
-    // 1. Enviar finalizados al fondo
-    if (isFinishedA && !isFinishedB) return 1;
-    if (!isFinishedA && isFinishedB) return -1;
+      // Si tienen el mismo estado, ordenar por fecha más cercana
+      return dateA - dateB;
+    }
 
-    // 2. Si comparten el mismo grupo (ambos activos o ambos finalizados), ordenar por fecha
-    const dateA = new Date(a.date.replace(" hrs", "")).getTime();
-    const dateB = new Date(b.date.replace(" hrs", "")).getTime();
-
-    return dateA - dateB;
+    return 0;
   });
 }
 
@@ -38,10 +48,10 @@ function renderMeetups(meetups: Meetup[] = filteredMeetups): void {
   const container = document.getElementById("meetups-container");
   if (!container) return;
 
-  // Se aplica la ordenación por Estado y Fecha
-  const sortedMeetups = sortMeetupsByStatusAndDate(meetups);
+  // 1. Aplicar la ordenación seleccionada actualmente
+  const sortedMeetups = sortMeetups(meetups, currentSort);
 
-  // Limpiar contenedor
+  // 2. Limpiar contenedor
   container.innerHTML = "";
 
   if (sortedMeetups.length === 0) {
@@ -50,11 +60,12 @@ function renderMeetups(meetups: Meetup[] = filteredMeetups): void {
     return;
   }
 
-  // Paginación sobre la lista ordenada
+  // 3. Aplicar paginación
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
   const paginatedMeetups = sortedMeetups.slice(startIndex, endIndex);
 
+  // 4. Renderizar tarjetas
   paginatedMeetups.forEach((meetup) => {
     container.innerHTML += generateMeetupCardHtml(meetup);
   });
@@ -104,14 +115,24 @@ function setupPaginationEvents(): void {
   });
 }
 
+function setupSortSelect(): void {
+  const sortSelect = document.getElementById("select-sort") as HTMLSelectElement | null;
+  if (!sortSelect) return;
+
+  sortSelect.addEventListener("change", () => {
+    currentSort = sortSelect.value as SortOption;
+    currentPage = 1; // Volvemos a la primera página tras reordenar
+    renderMeetups();
+  });
+}
+
 function populateEventSelect(meetups: Meetup[]): void {
   const eventSelect = document.getElementById("select-event") as HTMLSelectElement | null;
   if (eventSelect === null) return;
 
   eventSelect.innerHTML = '<option value="">-- Elige un evento de la lista --</option>';
 
-  // Ordenamos también las opciones del select para reflejar el mismo orden de las tarjetas
-  const sortedMeetups = sortMeetupsByStatusAndDate(meetups);
+  const sortedMeetups = sortMeetups(meetups, currentSort);
 
   sortedMeetups.forEach((meetup) => {
     const option = document.createElement("option");
@@ -259,6 +280,7 @@ function setupReservationForm(): void {
 document.addEventListener("DOMContentLoaded", () => {
   loadMeetupsCatalog();
   setupFilterButtons();
+  setupSortSelect();
   setupPaginationEvents();
   setupReservationForm();
 });
