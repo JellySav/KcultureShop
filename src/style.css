@@ -204,3 +204,33 @@ input:focus, select:focus {
 .btn-submit:hover {
   opacity: 0.9;
 }
+
+.filter-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-filter {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+  border-color: var(--accent-purple);
+  color: var(--text-main);
+}
+
+.btn-filter.active {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+  color: white;
+  border-color: transparent;
+}
