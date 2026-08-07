@@ -30,7 +30,7 @@ const MOCK_MEETUPS: Meetup[] = [
     type: MeetupType.PRESENCIAL,
     countryOrPlatform: "Chile (Café K-Culture)",
     date: "2026-10-05 16:00 hrs",
-    spotsAvailable: 20,
+    spotsAvailable: 25,
     status: MeetupStatus.PROGRAMADO,
     imageUrl: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=60"
   },
@@ -41,7 +41,7 @@ const MOCK_MEETUPS: Meetup[] = [
     type: MeetupType.PRESENCIAL,
     countryOrPlatform: "Mexico (Café La Roma)",
     date: "2026-10-05 14:00 hrs",
-    spotsAvailable: 20,
+    spotsAvailable: 30,
     status: MeetupStatus.PROGRAMADO,
     imageUrl: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=60"
   },

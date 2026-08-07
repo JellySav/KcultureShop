@@ -20,9 +20,20 @@
       <!-- BARRA DE FILTROS -->
       <div class="filter-bar">
         <button class="btn-filter active" data-filter="ALL">Todos los Eventos</button>
-        <button class="btn-filter" data-filter="VIRTUAL">Solo Virtuales</button>
-        <button class="btn-filter" data-filter="PRESENCIAL">Presenciales</button>
+        <button class="btn-filter" data-filter="VIRTUAL">💻 Solo Virtuales</button>
+        <button class="btn-filter" data-filter="PRESENCIAL">📍 Presenciales</button>
       </div>
+
+      <!-- GRILLA DE EVENTOS -->
+      <div id="meetups-container" class="meetups-grid"></div>
+
+      <!-- CONTROLES DE PAGINACIÓN -->
+      <div id="pagination-container" class="pagination-controls">
+        <button id="btn-prev-page" class="btn-page" aria-label="Página anterior">&lt;</button>
+        <span id="page-indicator" class="page-indicator">Página 1 de 1</span>
+        <button id="btn-next-page" class="btn-page" aria-label="Página siguiente">&gt;</button>
+      </div>
+    </section>
 
       <div id="meetups-container" class="meetups-grid"></div>
     </section>
