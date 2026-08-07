@@ -1,12 +1,66 @@
-# kcultureShop — Hito 1: Dominio y Pruebas Unitarias
+# kcultureShop — Modulo de Chinzillas Sin Filtro
 
-Este repositorio de **kcultureShop** es el módulo; o extension, de comercio electrónico y tienda oficial que se quiere integrar al ecosistema del proyecto **Chinzillas Sin Filtro**; una plataforma colaborativa dedicada al análisis, reseñas, recomendaciones y noticias sobre cine, series, mangas, anime y contenido audiovisual asiático y global.
+Este repositorio es un modulo del **proyecto Chinzillas Sin Filtro**, una plataforma colaborativa dedicada a eventos, comunidades, noticias y análisis sobre cine, series, mangas, anime y cultura pop global.
+
+Este proyecto abarca la implementación tanto del frontend interactivo de la agenda de eventos (Hito 2) como del módulo backend/core de e-commerce de kcultureShop (Hito 1), desarrollado para el programa de contenidos de Desafío Latam & Globant.
+
+
+## Navegación Rápida entre Hitos
+```text 
+Hito,Módulo / Componente,Tecnología,Ubicación / Comando Principal
+Hito 2,"Agenda de Eventos, Filtros y Reservas","TypeScript, HTML5, CSS3, DOM API",npm run dev (Servidor local web)
+Hito 1,Core de Dominio y Pruebas Unitarias,"Java 17, JUnit 5, Mockito, JaCoCo",mvn test / ./mvnw verify (Directorio root / subcarpeta)
+```
+
+## Hito 2: Agenda de Eventos y Sistema de Reservas (Frontend Web)
+
+El Hito 2 comprende el desarrollo de la interfaz dinámica para la exploración de eventos de la comunidad "Chinzillas Sin Filtro", incorporando gestión de estado en memoria, ordenamiento, filtrado en tiempo real, paginación cliente y un sistema interactivo de reserva de cupos. 
+
+Este módulo para el Hito 2 comprendió el desarrollo de la plataforma interactiva de la Agenda de Eventos y Reservas, construida sobre TypeScript y DOM API nativa, garantizando una arquitectura orientada a componentes, gestión de estado local aislada y un sistema reactivo de ordenamiento, filtrado y control de stock en tiempo real.
+
+## Funcionalidades Clave
+- **`Control de Estados y Jerarquia`**: Priorización visual y de selecciones entre eventos PROGRAMADOS, AGOTADO y FINALIZADO.
+
+- **`Ordenamiento Dinámico (SortOption)`**: Permite ordenar la agenda por fecha (próximos/más lejanos) o agrupando eventos por estado (activos primero, finalizados al fondo).
+
+- **`Filtrado Multiple`**: Segmentación instantánea por modalidad (TODOS, VIRTUAL, PRESENCIAL).
+
+- **`Paginación Cliente`**: Navegación por páginas fijas de 6 eventos (PAGE_SIZE = 6) con actualización dinámica de controles (Prev/Next/Indicador de página).
+
+- **`Formulario de Reservas en Tiempo Real`**: Validación de entradas (Email regex, cupos válidos), descuento interactivo de stock de cupos y deshabilitación automática de eventos agotados/finalizados en el <select>.
+
+
+## Tecnologías y Requisitos
+
+* **Lenguaje:** TypeScript / JavaScript (ES6+)
+* **Tooling & Bulder:** Vite / ES Modules
+* **Manipulacion de Interfaz:** HTML5, CSS3 (Flexbox/Grid), DOM API nativa
+
+
+
+## Instalacion y Ejecución (Hito 2)
+
+
+### 1. Iniciar el servidor de desarrollo 
+```bash
+mvn install
+```
+
+### 2. Iniciar el servidor de desarrollo 
+```bash
+npm run dev
+```
+
+### 3. Abrir la URL local indicada en la consola (por ejemplo, http://localhost:5173) para interactuar con la agenda de meetups.
+
+
+
+
+## Hito 1: kcultureShop — Dominio y Pruebas Unitarias (Backend Core)
+
+El Hito 1 comprendió el diseño e implementación del Core de Dominio Puro en Java para el módulo e-commerce kcultureShop, garantizando el aislamiento respecto a frameworks externos y alcanzando un 100% de cobertura de código (Branch y Line Coverage) con JUnit 5 y JaCoCo.
 
 Este módulo para el hito 1; comprendio el diseño e implementación del **Core de Dominio Puro** en Java, garantizando el aislamiento total respecto a frameworks externos y bases de datos físicas, un diseño de alta cohesión y una suite automatizada de pruebas unitarias que alcanza un **100% de cobertura de código (Branch/Line Coverage)**.
-
-Para su realizacion y complementacion con la idea ya pensada, se siguieron las intrucciones para la entrega del "Hito 1 - Pruebas Unitarias" para el programa de fundamentos de JAVA de parte de Desafio Latam & Globant. 
-
-
 
 ## Contexto de Negocio
 
@@ -15,7 +69,6 @@ Para su realizacion y complementacion con la idea ya pensada, se siguieron las i
 - **`Order`**: Entidad de dominio que representa un pedido, gestiona la adición de productos, mantiene el total acumulado y asigna el tipo de envío.
 - **`Product`**: Representa un artículo disponible en catálogo, controlando stock, categorías y validación estricta de cantidades.
 - **`OrderService`**: Servicio de aplicación que procesa compras y coordina la notificación de envíos mediante la abstracción `ShippingNotifier`.
-
 
 
 ## Componentes del Proyecto
@@ -32,7 +85,6 @@ Para su realizacion y complementacion con la idea ya pensada, se siguieron las i
 * **`ShippingNotifier`**: Interfaz desacoplada (puerto/abstracción) para el envío de notificaciones de despacho.
 
 
-
 ## Tecnologías y Requisitos
 
 * **Lenguaje:** Java 17+ (requiere `JAVA_HOME` configurado a JDK 17)
@@ -43,7 +95,7 @@ Para su realizacion y complementacion con la idea ya pensada, se siguieron las i
 
 
 
-## Ejecución y Comandos Maven
+## Ejecución y Comandos Maven (Hito 1)
 
 Puedes ejecutar los comandos utilizando Maven global o el wrapper incluido (`./mvnw` en Linux/macOS o `mvnw.cmd` en Windows).
 
@@ -93,14 +145,20 @@ Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica ve
 > El reporte completo e interactivo se genera localmente en `target/site/jacoco/index.html` tras ejecutar `mvn verify`.
 
 
-## Estructura del Repositorio
+## Estructura del Repositorio (Hito 1 & 2)
 ```text
-kculture-shop/
-├── .mvn/
+/
+├── index.html                  # Marcado base de la aplicación web (Hito 2)
+├── package.json                # Configuración de dependencias TypeScript/Vite
+├── tsconfig.json               # Configuración del compilador TypeScript
+├── pom.xml                     # Configuración de dependencias Maven (Hito 1)
+├── mvnw                        # Wrapper ejecutable de Maven (Linux/macOS)
+├── mvnw.cmd                    # Wrapper ejecutable de Maven (Windows)
+├── .mvn/                       # Configuración interna del wrapper de Maven
 │   └── wrapper/
 │       └── maven-wrapper.properties
 ├── src/
-│   ├── main/
+│   ├── main/                   # Código Fuente Java - Backend (Hito 1)
 │   │   └── java/
 │   │       └── com/
 │   │           └── kcultureshop/
@@ -113,20 +171,23 @@ kculture-shop/
 │   │               └── service/
 │   │                   ├── OrderService.java
 │   │                   └── ShippingNotifier.java
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── kcultureshop/
-│                   ├── domain/
-│                   │   ├── OrderTest.java
-│                   │   └── ProductTest.java
-│                   └── service/
-│                       └── OrderServiceTest.java
-├── mvnw
-├── mvnw.cmd
-├── pom.xml
-├── .gitignore
-└── README.md
+│   ├── test/                   # Pruebas Unitarias Java (Hito 1)
+│   │   └── java/
+│   │       └── com/
+│   │           └── kcultureshop/
+│   │               ├── domain/
+│   │               │   ├── OrderTest.java
+│   │               │   └── ProductTest.java
+│   │               └── service/
+│   │                   └── OrderServiceTest.java
+│   ├── main.ts                 # Controlador principal DOM - Frontend (Hito 2)
+│   ├── models/
+│   │   └── meetup.ts           # Interfaces y tipos de la agenda (Hito 2)
+│   ├── services/
+│   │   └── meetupService.ts    # Servicio de datos de eventos (Hito 2)
+│   └── components/
+│       └── MeetupCard.ts       # Renderizado de tarjetas HTML (Hito 2)
+└── .gitignore                  # Omite temporales, compilados (/target, /node_modules, /dist)
 ```
 
 ## Notas de Implementación
