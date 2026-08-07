@@ -3,12 +3,12 @@ import { Meetup, MeetupStatus, MeetupType } from "../models/meetup";
 export function generateMeetupCardHtml(meetup: Meetup): string {
   const isLive = meetup.status === MeetupStatus.EN_VIVO;
   const statusBadge = isLive 
-    ? `<span class="badge badge-live">🔴 En Vivo</span>` 
+    ? `<span class="badge badge-live">En Vivo</span>` 
     : `<span class="badge badge-status">${meetup.status}</span>`;
 
   const typeBadge = meetup.type === MeetupType.VIRTUAL 
-    ? `<span class="badge badge-virtual">💻 Virtual</span>` 
-    : `<span class="badge badge-physical">📍 Presencial</span>`;
+    ? `<span class="badge badge-virtual">Virtual</span>` 
+    : `<span class="badge badge-physical">Presencial</span>`;
 
   return `
     <article class="card-meetup" data-id="${meetup.id}">
