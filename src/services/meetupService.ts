@@ -66,6 +66,28 @@ const MOCK_MEETUPS: Meetup[] = [
     spotsAvailable: 30,
     status: MeetupStatus.PROGRAMADO,
     imageUrl: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=60"
+  },
+  {
+    id: "m7",
+    title: "Evento Game - Pokemon Blanco & Negro",
+    category: "VIDEOJUEGOS",
+    type: MeetupType.VIRTUAL,
+    countryOrPlatform: "Peru (Club Pokemon)",
+    date: "2026-10-13 12:30 hrs",
+    spotsAvailable: 30,
+    status: MeetupStatus.PROGRAMADO,
+    imageUrl: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=60"
+  },
+  {
+    id: "m8",
+    title: "Maraton C-drama - Nirvana in Fire",
+    category: "WATCH_PARTY",
+    type: MeetupType.VIRTUAL,
+    countryOrPlatform: "Online",
+    date: "2026-11-21 16:30 hrs",
+    spotsAvailable: 40,
+    status: MeetupStatus.PROGRAMADO,
+    imageUrl: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=60"
   }
 ];
 
