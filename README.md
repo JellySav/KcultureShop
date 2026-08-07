@@ -12,7 +12,7 @@ Hito 2,"Agenda de Eventos, Filtros y Reservas","TypeScript, HTML5, CSS3, DOM API
 Hito 1,Core de Dominio y Pruebas Unitarias,"Java 17, JUnit 5, Mockito, JaCoCo",mvn test / ./mvnw verify (Directorio root / subcarpeta)
 ```
 
-## Hito 2: Agenda de Eventos y Sistema de Reservas (Frontend Web)
+# Hito 2: Agenda de Eventos y Sistema de Reservas (Frontend Web)
 
 El Hito 2 comprende el desarrollo de la interfaz dinámica para la exploración de eventos de la comunidad "Chinzillas Sin Filtro", incorporando gestión de estado en memoria, ordenamiento, filtrado en tiempo real, paginación cliente y un sistema interactivo de reserva de cupos. 
 
@@ -56,7 +56,7 @@ npm run dev
 
 
 
-## Hito 1: kcultureShop — Dominio y Pruebas Unitarias (Backend Core)
+# Hito 1: kcultureShop — Dominio y Pruebas Unitarias (Backend Core)
 
 El Hito 1 comprendió el diseño e implementación del Core de Dominio Puro en Java para el módulo e-commerce kcultureShop, garantizando el aislamiento respecto a frameworks externos y alcanzando un 100% de cobertura de código (Branch y Line Coverage) con JUnit 5 y JaCoCo.
 
