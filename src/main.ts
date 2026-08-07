@@ -1,4 +1,4 @@
-import { Meetup, MeetupType } from "./models/meetup";
+import { Meetup, MeetupStatus, MeetupType } from "./models/meetup";
 import { fetchMeetups } from "./services/meetupService";
 import { generateMeetupCardHtml } from "./components/MeetupCard";
 
@@ -8,22 +8,52 @@ let filteredMeetups: Meetup[] = [];
 let currentPage = 1;
 const PAGE_SIZE = 6;
 
-function renderMeetups(): void {
-  const container = document.getElementById("meetups-container");
-  if (container === null) return;
+export function sortMeetupsByDate(meetups: Meetup[], ascending: boolean = true): Meetup[] {
+  return [...meetups].sort((a, b) => {
+    const dateA = new Date(a.date.replace(" hrs", "")).getTime();
+    const dateB = new Date(b.date.replace(" hrs", "")).getTime();
 
+    return ascending ? dateA - dateB : dateB - dateA;
+  });
+}
+
+export function sortMeetupsByStatusAndDate(meetups: Meetup[]): Meetup[] {
+  return [...meetups].sort((a, b) => {
+    const isFinishedA = a.status === MeetupStatus.FINALIZADO;
+    const isFinishedB = b.status === MeetupStatus.FINALIZADO;
+
+    // 1. Enviar finalizados al fondo
+    if (isFinishedA && !isFinishedB) return 1;
+    if (!isFinishedA && isFinishedB) return -1;
+
+    // 2. Si comparten el mismo grupo (ambos activos o ambos finalizados), ordenar por fecha
+    const dateA = new Date(a.date.replace(" hrs", "")).getTime();
+    const dateB = new Date(b.date.replace(" hrs", "")).getTime();
+
+    return dateA - dateB;
+  });
+}
+
+function renderMeetups(meetups: Meetup[] = filteredMeetups): void {
+  const container = document.getElementById("meetups-container");
+  if (!container) return;
+
+  // Se aplica la ordenación por Estado y Fecha
+  const sortedMeetups = sortMeetupsByStatusAndDate(meetups);
+
+  // Limpiar contenedor
   container.innerHTML = "";
 
-  if (filteredMeetups.length === 0) {
-    container.innerHTML = "<p class='text-muted'>No se encontraron encuentros para esta categoría.</p>";
+  if (sortedMeetups.length === 0) {
+    container.innerHTML = `<p class="no-events">No hay eventos disponibles en esta categoría.</p>`;
     updatePaginationControls();
     return;
   }
 
-  // Cálculo de índices para paginación
+  // Paginación sobre la lista ordenada
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const paginatedMeetups = filteredMeetups.slice(startIndex, endIndex);
+  const paginatedMeetups = sortedMeetups.slice(startIndex, endIndex);
 
   paginatedMeetups.forEach((meetup) => {
     container.innerHTML += generateMeetupCardHtml(meetup);
@@ -80,14 +110,21 @@ function populateEventSelect(meetups: Meetup[]): void {
 
   eventSelect.innerHTML = '<option value="">-- Elige un evento de la lista --</option>';
 
-  meetups.forEach((meetup) => {
+  // Ordenamos también las opciones del select para reflejar el mismo orden de las tarjetas
+  const sortedMeetups = sortMeetupsByStatusAndDate(meetups);
+
+  sortedMeetups.forEach((meetup) => {
     const option = document.createElement("option");
     option.value = meetup.id;
 
+    const isFinished = meetup.status === MeetupStatus.FINALIZADO;
     const isSoldOut = meetup.spotsAvailable <= 0;
     const badgeType = meetup.type === MeetupType.VIRTUAL ? "Virtual" : "Presencial";
 
-    if (isSoldOut) {
+    if (isFinished) {
+      option.textContent = `[FINALIZADO] ${meetup.title}`;
+      option.disabled = true;
+    } else if (isSoldOut) {
       option.textContent = `[AGOTADO] ${meetup.title}`;
       option.disabled = true;
     } else {
@@ -139,7 +176,6 @@ function setupFilterButtons(): void {
         filteredMeetups = allMeetups.filter((m) => m.type === MeetupType.PRESENCIAL);
       }
 
-      // Reiniciamos a la primera página al cambiar el filtro -> Evita error en base a la carga de la pagina
       currentPage = 1;
       renderMeetups();
     });

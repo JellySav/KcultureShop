@@ -1,23 +1,34 @@
 import { Meetup, MeetupStatus, MeetupType } from "../models/meetup";
 
 export function generateMeetupCardHtml(meetup: Meetup): string {
-  const isSoldOut = meetup.spotsAvailable <= 0;
+  const isFinished = meetup.status === MeetupStatus.FINALIZADO;
+  const isSoldOut = meetup.spotsAvailable <= 0 && !isFinished;
   
   let statusBadge: string;
-  if (isSoldOut) {
-    statusBadge = `<span class="badge badge-soldout">Agotado</span>`;
-  } else if (meetup.status === MeetupStatus.EN_VIVO) {
+  
+  // 1. Prioridad Máxima: Evento Finalizado
+  if (isFinished) {
+    statusBadge = `<span class="badge badge-status">FINALIZADO</span>`;
+  } 
+  // 2. Evento En Vivo
+  else if (meetup.status === MeetupStatus.EN_VIVO) {
     statusBadge = `<span class="badge badge-live">En Vivo</span>`;
-  } else {
+  } 
+  // 3. Evento Agotado (solo si NO está finalizado)
+  else if (isSoldOut) {
+    statusBadge = `<span class="badge badge-soldout">Agotado</span>`;
+  } 
+  // 4. Evento Programado estándar
+  else {
     statusBadge = `<span class="badge badge-status">${meetup.status}</span>`;
   }
 
   const typeBadge = meetup.type === MeetupType.VIRTUAL 
-    ? `<span class="badge badge-virtual">Virtual</span>` 
-    : `<span class="badge badge-physical">Presencial</span>`;
+    ? `<span class="badge badge-virtual">VIRTUAL</span>` 
+    : `<span class="badge badge-physical">PRESENCIAL</span>`;
 
   return `
-    <article class="card-meetup ${isSoldOut ? "card-soldout" : ""}" data-id="${meetup.id}">
+    <article class="card-meetup ${isSoldOut || isFinished ? "card-soldout" : ""}" data-id="${meetup.id}">
       <img src="${meetup.imageUrl}" alt="${meetup.title}" class="card-image-wrapper" />
       <div class="card-content">
         <div class="card-badges">
