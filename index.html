@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chinzillas Sin Filtro — Fanmeetings & Encuentros de Fans</title>
-  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
   <header class="app-header">
@@ -20,8 +20,8 @@
       <!-- BARRA DE FILTROS -->
       <div class="filter-bar">
         <button class="btn-filter active" data-filter="ALL">Todos los Eventos</button>
-        <button class="btn-filter" data-filter="VIRTUAL">💻 Solo Virtuales</button>
-        <button class="btn-filter" data-filter="PRESENCIAL">📍 Presenciales</button>
+        <button class="btn-filter" data-filter="VIRTUAL">Solo Virtuales</button>
+        <button class="btn-filter" data-filter="PRESENCIAL">Presenciales</button>
       </div>
 
       <!-- GRILLA DE EVENTOS -->
@@ -35,36 +35,33 @@
       </div>
     </section>
 
-      <div id="meetups-container" class="meetups-grid"></div>
-    </section>
-
     <section class="section">
       <h2>Inscribirse o Reservar Cupo</h2>
       <form id="reservation-form" class="form-card">
     
-      <div class="form-group">
-        <label for="select-event">Selecciona el Evento al que deseas asistir:</label>
-        <select id="select-event" required>
-          <option value="">-- Cargando eventos disponibles... --</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="select-event">Selecciona el Evento al que deseas asistir:</label>
+          <select id="select-event" required>
+            <option value="">-- Cargando eventos disponibles... --</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="txt-name">Nombre Completo:</label>
-        <input type="text" id="txt-name" placeholder="Ej. Yael..." required />
-      </div>
+        <div class="form-group">
+          <label for="txt-name">Nombre Completo:</label>
+          <input type="text" id="txt-name" placeholder="Ej. Yael..." required />
+        </div>
 
-      <div class="form-group">
-        <label for="txt-email">Correo Electrónico:</label>
-        <input type="email" id="txt-email" placeholder="usuario@correo.com" required />
-      </div>
+        <div class="form-group">
+          <label for="txt-email">Correo Electrónico:</label>
+          <input type="email" id="txt-email" placeholder="usuario@correo.com" required />
+        </div>
 
-      <div class="form-group">
-        <label for="num-attendees">Número de Cupos / Asistentes:</label>
-        <input type="number" id="num-attendees" min="1" max="5" value="1" required />
-      </div>
+        <div class="form-group">
+          <label for="num-attendees">Número de Cupos / Asistentes:</label>
+          <input type="number" id="num-attendees" min="1" max="5" value="1" required />
+        </div>
 
-      <button type="submit" class="btn-submit">Confirmar Registro</button>
+        <button type="submit" class="btn-submit">Confirmar Registro</button>
       </form>
       <div id="form-feedback" class="feedback-area"></div>
     </section>
