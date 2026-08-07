@@ -1,53 +1,72 @@
-import { Meetup, MeetupStatus } from "../models/meetup";
+import { Meetup, MeetupStatus, MeetupType } from "../models/meetup";
 
 const MOCK_MEETUPS: Meetup[] = [
   {
     id: "m1",
-    title: "Aniversario Chinzillas — Especial K-Drama & C-Pop",
-    country: "Chile",
-    date: "2026-09-15",
-    spotsAvailable: 20,
+    title: "Watch Party: Maratón Final de Temporada — K-Drama Dear X",
+    category: "WATCH_PARTY",
+    type: MeetupType.VIRTUAL,
+    countryOrPlatform: "Discord / Teleparty",
+    date: "2026-09-15 20:00 hrs",
+    spotsAvailable: 50,
     status: MeetupStatus.PROGRAMADO
   },
   {
     id: "m2",
-    title: "Encuentro de Fans & Maratón Anime",
-    country: "México",
-    date: "2026-08-20",
+    title: "Club de Lectura & Análisis: Novela C-Pop / Manhwa",
+    category: "CHARLA_LIBRO",
+    type: MeetupType.VIRTUAL,
+    countryOrPlatform: "Google Meet",
+    date: "2026-08-20 18:30 hrs",
     spotsAvailable: 15,
     status: MeetupStatus.EN_VIVO
   },
   {
     id: "m3",
-    title: "Club de Lectura Libro Three Body",
-    country: "Perú",
-    date: "2026-07-10",
-    spotsAvailable: 0,
-    status: MeetupStatus.FINALIZADO
+    title: "Encuentro Presencial Chinzillas — Santiago",
+    category: "FANMEETING",
+    type: MeetupType.PRESENCIAL,
+    countryOrPlatform: "Chile (Café K-Culture)",
+    date: "2026-10-05 16:00 hrs",
+    spotsAvailable: 20,
+    status: MeetupStatus.PROGRAMADO
   },
   {
     id: "m4",
-    title: "Encuentro Fans Aniversario Supernatural",
-    country: "Chile",
-    date: "2026-07-26",
-    spotsAvailable: 0,
-    status: MeetupStatus.FINALIZADO
+    title: "Aniversario SuperSentai - Recap Best Chapters",
+    category: "WATCH_PARTY",
+    type: MeetupType.VIRTUAL,
+    countryOrPlatform: "Google Meet",
+    date: "2026-08-27 19:30 hrs",
+    spotsAvailable: 30,
+    status: MeetupStatus.PROGRAMADO
   },
   {
     id: "m5",
-    title: "Especial SuperSentai Aniversario 60",
-    country: "Mexico",
-    date: "2026-05-21",
-    spotsAvailable: 0,
-    status: MeetupStatus.FINALIZADO
+    title: "Cumpleaños Dylan Wang - Ciudad de Mexico",
+    category: "FANMEETING",
+    type: MeetupType.PRESENCIAL,
+    countryOrPlatform: "Mexico - Universidad Panamericana",
+    date: "2026-10-22 14:30 hrs",
+    spotsAvailable: 25,
+    status: MeetupStatus.PROGRAMADO
+  },
+  {
+    id: "m6",
+    title: "Encuentro Chinzillas - Argentina",
+    category: "FANMEETING",
+    type: MeetupType.PRESENCIAL,
+    countryOrPlatform: "Argentina - Mar del Plata",
+    date: "2026-09-23 14:30 hrs",
+    spotsAvailable: 20,
+    status: MeetupStatus.PROGRAMADO
   }
 ];
 
 export async function fetchMeetups(): Promise<Meetup[]> {
-  // Simular latencia de red (1.2 segundos) -> Investigar formato de red 
-  await new Promise((resolve) => setTimeout(resolve, 1200));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Hacer test cambiandolo a False, para revisar el catch
+  // Agregar test, con false para verificar el catch
   const responseOk = true;
 
   if (!responseOk) {

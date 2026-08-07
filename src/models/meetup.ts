@@ -4,10 +4,17 @@ export enum MeetupStatus {
   FINALIZADO = "FINALIZADO"
 }
 
+export enum MeetupType {
+  PRESENCIAL = "PRESENCIAL",
+  VIRTUAL = "VIRTUAL"
+}
+
 export interface Meetup {
   id: string;
   title: string;
-  country: string;
+  category: "WATCH_PARTY" | "CHARLA_LIBRO" | "FANMEETING" | "DEBATE_SERIE" | "ANIVERSARIO_PARTY" | "CUMPLE_SPECIAL";
+  type: MeetupType;
+  countryOrPlatform: string; // Ejemplo tipo Chile, Mexico, Discord,Zoom 
   date: string;
   spotsAvailable: number;
   status: MeetupStatus;
@@ -16,6 +23,6 @@ export interface Meetup {
 export interface ReservationPayload {
   fullName: string;
   email: string;
-  country: string;
+  meetupId: string;
   attendees: number;
 }
