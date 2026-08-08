@@ -2,14 +2,13 @@
 
 Este repositorio es un módulo del **proyecto Chinzillas Sin Filtro**, una plataforma colaborativa dedicada a eventos, comunidades, noticias y análisis sobre cine, series, mangas, anime y cultura pop global.
 
-Este proyecto abarca tanto el frontend interactivo de la agenda de eventos (Hito 2) como el módulo backend/core de e-commerce de kcultureShop (Hito 1), desarrollado para el programa de contenidos de Desafío Latam & Globant.
+Este proyecto abarca hasta el momento, tanto el frontend interactivo de la agenda de eventos (Hito 2) como el módulo backend/core de e-commerce de kcultureShop (Hito 1) su realizacion se utilizo para el programa "Fundamentos de Java" de Desafío Latam & Globant.
 
 ## Historial de Hitos
 
 - **Hito 1** — Core de dominio y pruebas unitarias (kcultureShop)
   → [Ver código en este punto](https://github.com/JellySav/KcultureShop/releases/tag/hito-1)
 - **Hito 2** — Agenda de eventos, formularios y reservas (Frontend)
-  → [Codigo Actual]
 
 ## Navegación Rápida entre Hitos
 
@@ -140,12 +139,14 @@ Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica ve
 ---
 
 ## Estructura del Repositorio (Hito 1 & 2)
+> Para una mejor comprension de lo que hay en este repo, se muestra la estructura del mismo, especificando aquello que corresponde a cada hito.
 
 ```text
 /
 ├── index.html                  # Marcado base de la aplicación web (Hito 2)
 ├── package.json                # Configuración de dependencias TypeScript/Vite
 ├── tsconfig.json               # Configuración del compilador TypeScript
+├── vite.config.ts              # Configuracion Vite (Manejo mas directo)
 ├── pom.xml                     # Configuración de dependencias Maven (Hito 1)
 ├── mvnw                        # Wrapper ejecutable de Maven (Linux/macOS)
 ├── mvnw.cmd                    # Wrapper ejecutable de Maven (Windows)
@@ -175,6 +176,7 @@ Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica ve
 │   │               │   └── ProductTest.java
 │   │               └── service/
 │   │                   └── OrderServiceTest.java
+│   ├── style.css               # Estilos de la agenda de eventos (Hito 2)
 │   ├── main.ts                 # Controlador principal DOM - Frontend (Hito 2)
 │   ├── models/
 │   │   └── meetup.ts           # Interfaces y tipos de la agenda (Hito 2)
@@ -182,6 +184,7 @@ Mediante la suite de pruebas automatizadas, se respalda una cobertura lógica ve
 │   │   └── meetupService.ts    # Servicio de datos de eventos (Hito 2)
 │   └── components/
 │       └── MeetupCard.ts       # Renderizado de tarjetas HTML (Hito 2)
+├── index.html                  # Marcado base de la aplicación web (Hito 2)
 └── .gitignore                  # Omite temporales, compilados (/target, /node_modules, /dist)
 ```
 
