@@ -1,6 +1,7 @@
 import { Meetup, MeetupStatus, MeetupType } from "./models/meetup";
 import { fetchMeetups } from "./services/meetupService";
 import { generateMeetupCardHtml } from "./components/MeetupCard";
+import { generateMeetupSelectOptionsHtml } from "./components/MeetupSelect";
 
 // Tipos de ordenamiento soportados
 type SortOption = "DATE_ASC" | "DATE_DESC" | "STATUS";
@@ -13,31 +14,49 @@ let currentPage = 1;
 const PAGE_SIZE = 6;
 
 /**
+ * Convierte cadenas tipo "2026-08-15 20:00 hrs" o "2026-08-15" a milisegundos de manera segura.
+ */
+function parseMeetupDate(dateStr: string): number {
+  const cleanStr = dateStr.replace(/\s*hrs\s*/i, "").trim();
+  const isoStr = cleanStr.includes(" ") ? cleanStr.replace(" ", "T") : cleanStr;
+  const parsed = new Date(isoStr).getTime();
+  return isNaN(parsed) ? 0 : parsed;
+}
+
+/**
  * Ordena la lista de eventos según el criterio seleccionado.
+ * Garantiza que los eventos FINALIZADO siempre queden al final.
  */
 export function sortMeetups(meetups: Meetup[], criteria: SortOption): Meetup[] {
   return [...meetups].sort((a, b) => {
-    const dateA = new Date(a.date.replace(" hrs", "")).getTime();
-    const dateB = new Date(b.date.replace(" hrs", "")).getTime();
+    const isFinishedA = a.status === MeetupStatus.FINALIZADO;
+    const isFinishedB = b.status === MeetupStatus.FINALIZADO;
+
+    // REGLA GLOBAL: Eventos FINALIZADOS siempre al fondo
+    if (isFinishedA && !isFinishedB) return 1;
+    if (!isFinishedA && isFinishedB) return -1;
+
+    // Comparación por fecha segura
+    const timeA = parseMeetupDate(a.date);
+    const timeB = parseMeetupDate(b.date);
 
     if (criteria === "DATE_ASC") {
-      return dateA - dateB;
-    } 
-    
+      return timeA - timeB; // Más cercanos primero
+    }
+
     if (criteria === "DATE_DESC") {
-      return dateB - dateA;
-    } 
-    
+      return timeB - timeA; // Más lejanos primero
+    }
+
     if (criteria === "STATUS") {
-      const isFinishedA = a.status === MeetupStatus.FINALIZADO;
-      const isFinishedB = b.status === MeetupStatus.FINALIZADO;
+      const getPriority = (m: Meetup): number => {
+        if (m.status === MeetupStatus.EN_VIVO) return 1;
+        if (m.status === MeetupStatus.PROGRAMADO && m.spotsAvailable > 0) return 2;
+        if (m.spotsAvailable <= 0) return 3; // Agotado
+        return 4; // Finalizado
+      };
 
-      // Finalizados al fondo
-      if (isFinishedA && !isFinishedB) return 1;
-      if (!isFinishedA && isFinishedB) return -1;
-
-      // Si tienen el mismo estado, ordenar por fecha más cercana
-      return dateA - dateB;
+      return getPriority(a) - getPriority(b);
     }
 
     return 0;
@@ -121,39 +140,17 @@ function setupSortSelect(): void {
 
   sortSelect.addEventListener("change", () => {
     currentSort = sortSelect.value as SortOption;
-    currentPage = 1; // Volvemos a la primera página tras reordenar
+    currentPage = 1; // Volver a la primera página tras reordenar
     renderMeetups();
   });
 }
 
 function populateEventSelect(meetups: Meetup[]): void {
   const eventSelect = document.getElementById("select-event") as HTMLSelectElement | null;
-  if (eventSelect === null) return;
+  if (!eventSelect) return;
 
-  eventSelect.innerHTML = '<option value="">-- Elige un evento de la lista --</option>';
-
-  const sortedMeetups = sortMeetups(meetups, currentSort);
-
-  sortedMeetups.forEach((meetup) => {
-    const option = document.createElement("option");
-    option.value = meetup.id;
-
-    const isFinished = meetup.status === MeetupStatus.FINALIZADO;
-    const isSoldOut = meetup.spotsAvailable <= 0;
-    const badgeType = meetup.type === MeetupType.VIRTUAL ? "Virtual" : "Presencial";
-
-    if (isFinished) {
-      option.textContent = `[FINALIZADO] ${meetup.title}`;
-      option.disabled = true;
-    } else if (isSoldOut) {
-      option.textContent = `[AGOTADO] ${meetup.title}`;
-      option.disabled = true;
-    } else {
-      option.textContent = `[${badgeType}] ${meetup.title} (${meetup.spotsAvailable} cupos)`;
-    }
-
-    eventSelect.appendChild(option);
-  });
+  // Usa el componente modular de MeetupSelect para renderizar las opciones filtradas
+  eventSelect.innerHTML = generateMeetupSelectOptionsHtml(meetups);
 }
 
 async function loadMeetupsCatalog(): Promise<void> {
@@ -256,6 +253,7 @@ function setupReservationForm(): void {
 
       targetMeetup.spotsAvailable -= attendeesValue;
 
+      // Re-renderizar tarjetas y desplegable con la información de cupos actualizada
       renderMeetups();
       populateEventSelect(allMeetups);
 

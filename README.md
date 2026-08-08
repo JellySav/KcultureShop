@@ -19,7 +19,7 @@ Este proyecto abarca hasta el momento, tanto el frontend interactivo de la agend
 
 ---
 
-# Hito 2: Agenda de Eventos y Sistema de Reservas (Frontend Web)
+# Hito 2: Agenda de Eventos y Sistema de Reservas (Frontend TypeScript/Vite)
 
 El Hito 2 comprende el desarrollo de la interfaz dinámica para la exploración de eventos de la comunidad "Chinzillas Sin Filtro", incorporando gestión de estado en memoria, ordenamiento, filtrado en tiempo real, paginación cliente y un sistema interactivo de reserva de cupos, construido sobre TypeScript y DOM API nativa, con una arquitectura orientada a componentes y gestión de estado local aislada.
 

@@ -1,5 +1,52 @@
 import { Meetup, MeetupStatus, MeetupType } from "../models/meetup";
 
+export type SortOption = 'PROXIMOS' | 'LEJANOS' | 'ESTADO';
+
+function parseMeetupDate(dateStr: string): number {
+  const cleanStr = dateStr.replace(/\s*hrs\s*/i, "").trim();
+  const isoStr = cleanStr.includes(" ") ? cleanStr.replace(" ", "T") : cleanStr;
+  const parsed = new Date(isoStr).getTime();
+  return isNaN(parsed) ? 0 : parsed;
+}
+
+function isAgotado(meetup: Meetup): boolean {
+  return meetup.status !== MeetupStatus.FINALIZADO && meetup.spotsAvailable === 0;
+}
+
+export function sortMeetups(meetups: Meetup[], option: SortOption): Meetup[] {
+  return [...meetups].sort((a, b) => {
+    const isAFinalized = a.status === MeetupStatus.FINALIZADO;
+    const isBFinalized = b.status === MeetupStatus.FINALIZADO;
+
+    if (isAFinalized && !isBFinalized) return 1;  // 'a' va abajo
+    if (!isAFinalized && isBFinalized) return -1; // 'b' va abajo
+
+    // A partir de aquí, ambos son ACTIVOS o ambos son FINALIZADOS.
+    const timeA = parseMeetupDate(a.date);
+    const timeB = parseMeetupDate(b.date);
+
+    if (option === 'PROXIMOS') {
+      return timeA - timeB; // Menor fecha a mayor fecha (lo más cercano a hoy primero)
+    }
+
+    if (option === 'LEJANOS') {
+      return timeB - timeA; // Mayor fecha a menor fecha (lo más lejano al futuro primero)
+    }
+
+    if (option === 'ESTADO') {
+      const getPriority = (m: Meetup): number => {
+        if (m.status === MeetupStatus.EN_VIVO) return 1;
+        if (m.status === MeetupStatus.PROGRAMADO && !isAgotado(m)) return 2;
+        if (isAgotado(m)) return 3;
+        return 4; // FINALIZADO
+      };
+      return getPriority(a) - getPriority(b);
+    }
+
+    return 0;
+  });
+}
+
 const MOCK_MEETUPS: Meetup[] = [
   {
     id: "m1",
@@ -58,7 +105,7 @@ const MOCK_MEETUPS: Meetup[] = [
   },
   {
     id: "m6",
-    title: "Evento Game -Lanzamiento Especial Inazuma Eleven Victory Road",
+    title: "Evento Game - Lanzamiento Especial Inazuma Eleven Victory Road",
     category: "VIDEOJUEGOS",
     type: MeetupType.PRESENCIAL,
     countryOrPlatform: "Argentina (Club Latam)",
@@ -91,7 +138,7 @@ const MOCK_MEETUPS: Meetup[] = [
   },
   {
     id: "m9",
-    title: "Watch Party: Maraton Extreno Mystic Nine Season2",
+    title: "Watch Party: Maraton Estreno Mystic Nine Season2",
     category: "WATCH_PARTY",
     type: MeetupType.VIRTUAL,
     countryOrPlatform: "Google Meet",
